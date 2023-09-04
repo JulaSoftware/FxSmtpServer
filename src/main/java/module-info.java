@@ -11,6 +11,6 @@ module com.example.fxsmtpserver {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.example.fxsmtpserver to javafx.fxml;
-    exports com.example.fxsmtpserver;
+    opens de.herrvoennchen.fxsmtpserver to javafx.fxml;
+    exports de.herrvoennchen.fxsmtpserver;
 }
