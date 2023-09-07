@@ -1,4 +1,4 @@
-package de.herrvoennchen.fxsmtpserver
+package de.herrvoennchen.fxsmtp
 
 import javafx.fxml.FXML
 import javafx.scene.control.Button

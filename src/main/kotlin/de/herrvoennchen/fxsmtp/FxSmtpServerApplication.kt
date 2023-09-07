@@ -1,4 +1,4 @@
-package de.herrvoennchen.fxsmtpserver
+package de.herrvoennchen.fxsmtp
 
 import javafx.application.Application
 import javafx.fxml.FXMLLoader

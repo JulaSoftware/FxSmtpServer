@@ -10,7 +10,9 @@ module com.example.fxsmtpserver {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires subethasmtp;
+    requires slf4j.api;
 
-    opens de.herrvoennchen.fxsmtpserver to javafx.fxml;
-    exports de.herrvoennchen.fxsmtpserver;
+    opens de.herrvoennchen.fxsmtp to javafx.fxml;
+    exports de.herrvoennchen.fxsmtp;
 }
