@@ -1,15 +1,20 @@
-package de.herrvoennchen.fxsmtp
+package de.herrvoennchen.fxsmtp.controller
 
+import de.herrvoennchen.fxsmtp.FxSmtpServerApplication
 import de.herrvoennchen.fxsmtp.core.Configuration
 import de.herrvoennchen.fxsmtp.server.SmtpServer
+import javafx.beans.property.SimpleIntegerProperty
 import javafx.fxml.FXML
+import javafx.fxml.FXMLLoader
+import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.control.TextFormatter
-import javafx.util.StringConverter
-import javafx.util.converter.IntegerStringConverter
-import java.util.function.UnaryOperator
+import javafx.stage.Modality
+import javafx.stage.Stage
+import javafx.util.converter.NumberStringConverter
+import java.text.NumberFormat
 
 
 class MainViewController {
@@ -25,35 +30,17 @@ class MainViewController {
     @FXML
     private lateinit var statusLabel: Label
 
-
-    private var integerFilter: UnaryOperator<TextFormatter.Change> = UnaryOperator<TextFormatter.Change> { change: TextFormatter.Change ->
-        val demoText: String = change.controlNewText
-        if (demoText.matches("-?([1-9][0-9]*)?".toRegex())) {
-            return@UnaryOperator change
-        } else if ("-" == change.text) {
-            if (change.controlText.startsWith("-")) {
-                change.setText("")
-                change.setRange(0, 1)
-                change.setCaretPosition(change.caretPosition - 2)
-                change.setAnchor(change.anchor - 2)
-                return@UnaryOperator change
-            } else {
-                change.setRange(0, 0)
-                return@UnaryOperator change
-            }
-        }
-        null
-    }
-
-    private var stringConverter: StringConverter<Int> = object : IntegerStringConverter() {
-        override fun fromString(s: String): Int {
-            return if (s.isEmpty()) 0 else super.fromString(s)
-        }
-    }
+    private val portProperty = SimpleIntegerProperty(Configuration.instance().loadedConfig.smtp.port)
 
     @FXML
     fun initialize() {
-        portField.textFormatter = TextFormatter(stringConverter, Configuration.instance().loadedConfig.smtp.port, integerFilter)
+        val numberFormat = NumberFormat.getInstance()
+        numberFormat.isGroupingUsed = false
+
+        val formatter = TextFormatter(NumberStringConverter(numberFormat), 0, integerFilter)
+        portField.textFormatter = formatter
+
+        formatter.valueProperty().bindBidirectional(portProperty)
     }
 
     @FXML
@@ -81,5 +68,19 @@ class MainViewController {
 
     fun shutdown() {
         SmtpServer.instance().stopServer()
+    }
+
+    @FXML
+    fun openSettingsClick() {
+        val stage = Stage()
+        val fxmlLoader = FXMLLoader(FxSmtpServerApplication::class.java.getResource("config-view.fxml"))
+        val scene = Scene(fxmlLoader.load(), 400.0, 200.0)
+        stage.title = "FxSMTP Server - Einstellungen"
+        stage.scene = scene
+        stage.isAlwaysOnTop = true
+        stage.setOnHidden {
+            portProperty.value = Configuration.instance().loadedConfig.smtp.port
+        }
+        stage.show()
     }
 }

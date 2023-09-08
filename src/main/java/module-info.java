@@ -16,8 +16,10 @@ module de.herrvoennchen.fxsmtp {
     requires org.slf4j;
 
     opens de.herrvoennchen.fxsmtp to javafx.fxml;
+    opens de.herrvoennchen.fxsmtp.controller to javafx.fxml;
     exports de.herrvoennchen.fxsmtp;
     exports de.herrvoennchen.fxsmtp.core;
     exports de.herrvoennchen.fxsmtp.model;
     exports de.herrvoennchen.fxsmtp.server;
+    exports de.herrvoennchen.fxsmtp.controller;
 }

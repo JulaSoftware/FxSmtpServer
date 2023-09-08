@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.herrvoennchen.fxsmtp.MainViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.herrvoennchen.fxsmtp.controller.MainViewController">
     <top>
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -36,7 +36,7 @@
             </FlowPane>
             <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="settingsButton" mnemonicParsing="false" prefWidth="120.0" text="Einstellungen" />
+                  <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettingsClick" prefWidth="120.0" text="Einstellungen" />
                </children>
                <opaqueInsets>
                   <Insets />
