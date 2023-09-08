@@ -26,22 +26,20 @@ class ConfigViewController {
     private val emailFolderProperty = SimpleStringProperty(Configuration.instance().loadedConfig.email.folder)
 
     private fun initBinding() {
+        val numberFormat = NumberFormat.getInstance()
+        numberFormat.isGroupingUsed = false
+
+        val formatter = TextFormatter(NumberStringConverter(numberFormat), Configuration.instance().loadedConfig.smtp.port, integerFilter)
+        portField.textFormatter = formatter
+        formatter.valueProperty().bindBidirectional(portProperty)
         portProperty.addListener { _, _, newValue -> Configuration.instance().loadedConfig.smtp.port = newValue.toInt() }
+
+        emailFolderField.textProperty().bindBidirectional(emailFolderProperty)
         emailFolderProperty.addListener { _, _, newValue -> Configuration.instance().loadedConfig.email.folder = newValue }
     }
 
     @FXML
     fun initialize() {
-        val numberFormat = NumberFormat.getInstance()
-        numberFormat.isGroupingUsed = false
-
-        val converter: StringConverter<Number> = NumberStringConverter(numberFormat)
-        val formatter = TextFormatter(converter, Configuration.instance().loadedConfig.smtp.port, integerFilter)
-        portField.textFormatter = formatter
-        formatter.valueProperty().bindBidirectional(portProperty)
-
-        emailFolderField.textProperty().bindBidirectional(emailFolderProperty)
-
         initBinding()
     }
 
