@@ -9,13 +9,15 @@ import java.net.InetAddress
 
 class SmtpServer {
     private val logger = LoggerFactory.getLogger(SmtpServer::class.java)
-    private val smtpServer = SMTPServer(SimpleMessageListenerAdapter(MailMessageListener(MailStore())), SmtpAuthHandlerFactory())
+    private var smtpServer: SMTPServer? = null
 
     fun startServer(port: Int, bindAddress: InetAddress? = null) {
         try {
-            smtpServer.bindAddress = bindAddress
-            smtpServer.port = port
-            smtpServer.start()
+            smtpServer =
+                SMTPServer(SimpleMessageListenerAdapter(MailMessageListener(MailStore())), SmtpAuthHandlerFactory())
+            smtpServer!!.bindAddress = bindAddress
+            smtpServer!!.port = port
+            smtpServer!!.start()
         } catch (exception: RuntimeException) {
             if (exception.message != null && exception.message!!.contains("BindException")) { // Can't open port
                 logger.error("{}. Port {}", exception.message, port)
@@ -30,12 +32,13 @@ class SmtpServer {
         }
     }
 
-    fun isRunning() = smtpServer.isRunning
+    fun isRunning() = smtpServer?.isRunning == true
 
     fun stopServer() {
-        if (smtpServer.isRunning) {
+        if (smtpServer?.isRunning == true) {
             logger.debug("stopping server")
-            smtpServer.stop()
+            smtpServer!!.stop()
+            smtpServer = null
         }
     }
 
