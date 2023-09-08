@@ -1,0 +1,6 @@
+email:
+  suffix: '.eml'
+  folder: 'received-emails'
+
+smtp:
+  port: 25

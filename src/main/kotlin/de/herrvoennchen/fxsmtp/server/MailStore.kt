@@ -1,5 +1,6 @@
 package de.herrvoennchen.fxsmtp.server
 
+import de.herrvoennchen.fxsmtp.core.Configuration
 import de.herrvoennchen.fxsmtp.core.I18n
 import de.herrvoennchen.fxsmtp.model.Email
 import org.slf4j.LoggerFactory
@@ -44,7 +45,7 @@ class MailStore {
                 i.toString()
             } else ""
 
-            file = File("$filePath$iStr.msg") //Configuration.INSTANCE.get("emails.suffix")
+            file = File("$filePath$iStr${Configuration.instance().loadedConfig.email.suffix}")
         }
 
         try {

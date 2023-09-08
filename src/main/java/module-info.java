@@ -1,4 +1,4 @@
-module com.example.fxsmtpserver {
+module de.herrvoennchen.fxsmtp {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -11,8 +11,13 @@ module com.example.fxsmtpserver {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires subethasmtp;
-    requires slf4j.api;
+    requires org.slf4j.simple;
+    requires org.yaml.snakeyaml;
+    requires org.slf4j;
 
     opens de.herrvoennchen.fxsmtp to javafx.fxml;
     exports de.herrvoennchen.fxsmtp;
+    exports de.herrvoennchen.fxsmtp.core;
+    exports de.herrvoennchen.fxsmtp.model;
+    exports de.herrvoennchen.fxsmtp.server;
 }

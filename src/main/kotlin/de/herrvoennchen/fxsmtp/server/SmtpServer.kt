@@ -11,7 +11,7 @@ class SmtpServer {
     private val logger = LoggerFactory.getLogger(SmtpServer::class.java)
     private val smtpServer = SMTPServer(SimpleMessageListenerAdapter(MailMessageListener(MailStore())), SmtpAuthHandlerFactory())
 
-    fun startServer(port: Int, bindAddress: InetAddress) {
+    fun startServer(port: Int, bindAddress: InetAddress? = null) {
         try {
             smtpServer.bindAddress = bindAddress
             smtpServer.port = port
@@ -30,10 +30,30 @@ class SmtpServer {
         }
     }
 
+    fun isRunning() = smtpServer.isRunning
+
     fun stopServer() {
         if (smtpServer.isRunning) {
             logger.debug("stopping server")
             smtpServer.stop()
         }
+    }
+
+    companion object {
+        @Volatile
+        private var instance: SmtpServer? = null
+
+        fun instance(): SmtpServer {
+            if (instance == null) {
+                synchronized(this) {
+                    if (instance == null) {
+                        instance = SmtpServer()
+                    }
+                }
+            }
+
+            return instance!!
+        }
+
     }
 }

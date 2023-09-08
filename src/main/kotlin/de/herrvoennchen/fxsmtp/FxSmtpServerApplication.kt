@@ -11,6 +11,7 @@ class FxSmtpServerApplication : Application() {
         val scene = Scene(fxmlLoader.load(), 800.0, 600.0)
         stage.title = "FxSMTP Server"
         stage.scene = scene
+        stage.setOnCloseRequest { fxmlLoader.getController<MainViewController>().shutdown() }
         stage.show()
     }
 }
