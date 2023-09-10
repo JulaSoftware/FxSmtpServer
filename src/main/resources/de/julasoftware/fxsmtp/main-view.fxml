@@ -73,11 +73,11 @@
                                 </TableColumn>
                                 <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="300.0" text="Betreff">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="subjectDecoded"/>
+                                        <PropertyValueFactory property="subject"/>
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" sortable="false"
-                                             text="Lokale Datei" visible="true">
+                                             text="Lokale Datei" visible="false">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="filePath"/>
                                     </cellValueFactory>

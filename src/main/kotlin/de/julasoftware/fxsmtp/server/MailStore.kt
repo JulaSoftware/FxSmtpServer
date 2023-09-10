@@ -30,8 +30,7 @@ class MailStore {
         return Email(
             from = from,
             to = to,
-            emailString = mimeMessage.content.toString(),
-            subject = mimeMessage.subject,
+            mimeMessage = mimeMessage,
             filePath = saveEmailToFile(mimeMessage)
         )
     }

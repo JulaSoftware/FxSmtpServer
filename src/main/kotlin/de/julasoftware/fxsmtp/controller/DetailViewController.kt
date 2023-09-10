@@ -34,9 +34,9 @@ class DetailViewController {
         ModelManager.instance().selectedEmailObservers.add { email ->
             toProperty.value = email?.to
             fromProperty.value = email?.from
-            subjectProperty.value = email?.subjectDecoded
+            subjectProperty.value = email?.subject
 
-            messageWebView.engine.loadContent(email?.emailString)
+            messageWebView.engine.loadContent(email?.mainContent)
         }
     }
 }
