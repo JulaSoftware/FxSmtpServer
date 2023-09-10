@@ -80,7 +80,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
-    testImplementation("org.apache.commons:commons-email:1.5")
+    implementation("org.apache.commons:commons-email:1.5")
 }
 
 test {

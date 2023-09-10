@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.julasoftware.fxsmtp.controller.DetailViewController">
+   <children>
+      <Label layoutX="12.0" layoutY="14.0" text="An" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="14.0" />
+      <Label layoutX="25.0" layoutY="49.0" text="Von" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="49.0" />
+      <Label layoutX="27.0" layoutY="84.0" text="Betreff" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="84.0" />
+      <Label layoutX="17.0" layoutY="115.0" text="Nachricht" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="119.0" />
+      <TextField fx:id="toTextField" editable="false" layoutX="135.0" layoutY="14.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <TextField fx:id="fromTextField" editable="false" layoutX="252.0" layoutY="44.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="45.0" />
+      <TextField fx:id="subjectTextField" editable="false" layoutX="205.0" layoutY="77.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
+      <WebView fx:id="messageWebView" layoutX="90.0" layoutY="116.0" prefHeight="235.0" prefWidth="408.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="115.0" />
+   </children>
+</AnchorPane>

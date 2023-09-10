@@ -6,9 +6,14 @@ import kotlin.properties.Delegates
 
 class ModelManager {
     val receivedEmailObservers = mutableListOf<(Email) -> Unit>()
+    val selectedEmailObservers = mutableListOf<(Email?) -> Unit>()
 
     var newEmail: Email by Delegates.observable(emptyEmail()) { _, _, newValue ->
         receivedEmailObservers.forEach { it(newValue) }
+    }
+
+    var selectedEmail: Email? by Delegates.observable(null) { _, _, newValue ->
+        selectedEmailObservers.forEach { it(newValue) }
     }
 
     companion object {

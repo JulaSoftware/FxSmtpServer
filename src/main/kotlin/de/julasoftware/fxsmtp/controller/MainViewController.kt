@@ -10,6 +10,8 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.control.*
+import javafx.scene.input.MouseButton
+import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
 import javafx.util.converter.NumberStringConverter
 import org.slf4j.LoggerFactory
@@ -50,6 +52,25 @@ class MainViewController {
             logger.warn("received email in Controller ${newMail.from}")
             emailTableView.items.add(newMail)
         }
+    }
+
+    @FXML
+    fun onMouseEvent(event: MouseEvent) {
+        if (event.button == MouseButton.PRIMARY && event.clickCount == 2) {
+            openEmailDetails((event.source as TableView<Email>).selectionModel.selectedItem)
+        }
+    }
+
+    private fun openEmailDetails(email: Email) {
+        val stage = Stage()
+        val fxmlLoader = FXMLLoader(FxSmtpServerApplication::class.java.getResource("detail-view.fxml"))
+        val scene = Scene(fxmlLoader.load(), 600.0, 500.0)
+        stage.title = email.subject
+        stage.scene = scene
+        stage.isAlwaysOnTop = true
+        stage.show()
+
+        ModelManager.instance().selectedEmail = email
     }
 
     @FXML

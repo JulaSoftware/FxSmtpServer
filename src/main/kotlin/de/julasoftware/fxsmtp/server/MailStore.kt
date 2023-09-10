@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory
 import org.subethamail.smtp.server.Session
 import java.io.*
 import java.nio.charset.Charset
-import java.nio.file.Files
 import java.nio.file.Path
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import javax.mail.internet.MimeMessage
 
 
 class MailStore {
@@ -26,14 +26,17 @@ class MailStore {
 
 
     fun save(from: String?, to: String?, data: InputStream?): Email {
-        val mailContent = convertToString(data)
-        val emailObj = Email(from = from, to = to, emailString = mailContent, subject = getSubjectFromEmail(mailContent))
-        emailObj.filePath = saveEmailToFile(mailContent)
-
-        return emailObj
+        val mimeMessage = MimeMessage(javax.mail.Session.getDefaultInstance(System.getProperties()), data)
+        return Email(
+            from = from,
+            to = to,
+            emailString = mimeMessage.content.toString(),
+            subject = mimeMessage.subject,
+            filePath = saveEmailToFile(mimeMessage)
+        )
     }
 
-    private fun saveEmailToFile(emailObj: String): Path {
+    private fun saveEmailToFile(emailMessage: MimeMessage): Path {
         val filePath = "${Configuration.instance().loadedConfig.email.folder}${File.separator}${dateFormat.format(Date())}"
 
         var i = 0
@@ -47,7 +50,8 @@ class MailStore {
         }
 
         try {
-            Files.writeString(file.toPath(), emailObj)
+            emailMessage.writeTo(FileOutputStream(file))
+            //Files.writeString(file.toPath(), emailObj)
         } catch (e: IOException) {
             // If we can't save file, we display the error in the SMTP logs
             val smtpLogger = LoggerFactory.getLogger(Session::class.java)

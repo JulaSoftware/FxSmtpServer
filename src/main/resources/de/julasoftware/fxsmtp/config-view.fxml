@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.julasoftware.fxsmtp.controller.ConfigViewController">
    <children>
-      <Label layoutX="14.0" layoutY="15.0" text="Port" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0" />
+      <Label layoutX="14.0" layoutY="18.0" text="Port" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="18.0" />
       <TextField fx:id="portField" layoutX="110.0" layoutY="14.0" prefWidth="120.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="14.0" />
       <Button defaultButton="true" layoutX="376.0" layoutY="360.0" mnemonicParsing="false" onAction="#cancelWindow" prefWidth="100.0" text="Speichern" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="120.0" />
       <Button cancelButton="true" layoutX="486.0" layoutY="360.0" mnemonicParsing="false" onAction="#cancelWindow" prefWidth="100.0" text="Abbrechen" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />

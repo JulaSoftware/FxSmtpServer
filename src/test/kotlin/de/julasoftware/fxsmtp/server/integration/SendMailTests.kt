@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
 import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeMessage
 
 class SendMailTests {
     private val logger = LoggerFactory.getLogger(SendMailTests::class.java)
@@ -24,10 +25,10 @@ class SendMailTests {
         email.hostName = TEST_HOST
         email.setSmtpPort(TEST_INTEGRATION_PORT)
         email.setStartTLSEnabled(true)
-        email.setFrom("test@gmail.com")
+        email.setFrom("test-sender@gmail.com")
         email.subject = "Simple Email Integration Test #1"
         email.setMsg("This is a simple email integration test. Test #1")
-        email.setTo(listOf(InternetAddress("test-sender@gmail.com")))
+        email.setTo(listOf(InternetAddress("test-receiver@gmail.com")))
 
         email.send()
     }
