@@ -1,11 +1,10 @@
 package de.julasoftware.fxsmtp.model
 
 import java.nio.file.Path
-import java.time.Instant
 import java.util.*
 
 class Email(
-    var receivedDate: Date = Date.from(Instant.MIN),
+    var receivedDate: Date = Date(),
     var from: String? = null,
     var to: String? = null,
     var subject: String? = null,

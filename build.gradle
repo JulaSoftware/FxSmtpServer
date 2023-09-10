@@ -26,7 +26,6 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 application {
-    mainModule = 'de.julasoftware.fxsmtp'
     mainClass = 'de.julasoftware.fxsmtp.FxSmtpServerApplication'
 }
 kotlin {
@@ -41,11 +40,10 @@ javafx {
 Date buildTimeAndDate = new Date()
 ext {
     moduleName = 'eu.hansolo.fxdemos'
-    buildDate  = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
-    buildTime  = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
-    platform   = osdetector.os == 'osx' ? osdetector.arch == 'aarch_64' ? 'mac-aarch64' : 'mac' : osdetector.os == 'windows' ? 'win' : osdetector.os == 'linux' ? osdetector.arch == 'aarch_64' ? 'linux-aarch64' : 'linux' : osdetector.os
+    buildDate = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
+    buildTime = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
+    platform = osdetector.os == 'osx' ? osdetector.arch == 'aarch_64' ? 'mac-aarch64' : 'mac' : osdetector.os == 'windows' ? 'win' : osdetector.os == 'linux' ? osdetector.arch == 'aarch_64' ? 'linux-aarch64' : 'linux' : osdetector.os
 }
-
 
 
 dependencies {
@@ -81,6 +79,8 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+    testImplementation("org.apache.commons:commons-email:1.5")
 }
 
 test {

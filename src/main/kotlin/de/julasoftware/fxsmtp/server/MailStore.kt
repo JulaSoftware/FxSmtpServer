@@ -25,11 +25,12 @@ class MailStore {
     private val dateFormat = SimpleDateFormat("ddMMyyhhmmssSSS")
 
 
-    fun save(from: String?, to: String?, data: InputStream?) {
+    fun save(from: String?, to: String?, data: InputStream?): Email {
         val mailContent = convertToString(data)
         val emailObj = Email(from = from, to = to, emailString = mailContent, subject = getSubjectFromEmail(mailContent))
         emailObj.filePath = saveEmailToFile(mailContent)
-        emailObj.receivedDate = Date()
+
+        return emailObj
     }
 
     private fun saveEmailToFile(emailObj: String): Path {

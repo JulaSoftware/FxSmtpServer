@@ -2,6 +2,7 @@ package de.julasoftware.fxsmtp.controller
 
 import de.julasoftware.fxsmtp.FxSmtpServerApplication
 import de.julasoftware.fxsmtp.core.Configuration
+import de.julasoftware.fxsmtp.core.ModelService
 import de.julasoftware.fxsmtp.server.SmtpServer
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.fxml.FXML
@@ -11,13 +12,15 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.control.TextFormatter
-import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.util.converter.NumberStringConverter
+import org.slf4j.LoggerFactory
 import java.text.NumberFormat
 
 
 class MainViewController {
+    private val logger = LoggerFactory.getLogger(MainViewController::class.java)
+
     @FXML
     private lateinit var startButton: Button
 
@@ -41,6 +44,8 @@ class MainViewController {
         portField.textFormatter = formatter
 
         formatter.valueProperty().bindBidirectional(portProperty)
+
+        ModelService.instance().receivedEmailObservers.add { s -> logger.warn(s) }
     }
 
     @FXML
