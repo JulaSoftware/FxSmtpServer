@@ -1,4 +1,4 @@
-module de.herrvoennchen.fxsmtp {
+module de.julasoftware.fxsmtp {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -15,11 +15,11 @@ module de.herrvoennchen.fxsmtp {
     requires org.yaml.snakeyaml;
     requires org.slf4j;
 
-    opens de.herrvoennchen.fxsmtp to javafx.fxml;
-    opens de.herrvoennchen.fxsmtp.controller to javafx.fxml;
-    exports de.herrvoennchen.fxsmtp;
-    exports de.herrvoennchen.fxsmtp.core;
-    exports de.herrvoennchen.fxsmtp.model;
-    exports de.herrvoennchen.fxsmtp.server;
-    exports de.herrvoennchen.fxsmtp.controller;
+    opens de.julasoftware.fxsmtp to javafx.fxml;
+    opens de.julasoftware.fxsmtp.controller to javafx.fxml;
+    exports de.julasoftware.fxsmtp;
+    exports de.julasoftware.fxsmtp.core;
+    exports de.julasoftware.fxsmtp.model;
+    exports de.julasoftware.fxsmtp.server;
+    exports de.julasoftware.fxsmtp.controller;
 }

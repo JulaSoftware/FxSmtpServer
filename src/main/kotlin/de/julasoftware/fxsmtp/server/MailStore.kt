@@ -1,8 +1,8 @@
-package de.herrvoennchen.fxsmtp.server
+package de.julasoftware.fxsmtp.server
 
-import de.herrvoennchen.fxsmtp.core.Configuration
-import de.herrvoennchen.fxsmtp.core.I18n
-import de.herrvoennchen.fxsmtp.model.Email
+import de.julasoftware.fxsmtp.core.Configuration
+import de.julasoftware.fxsmtp.core.I18n
+import de.julasoftware.fxsmtp.model.Email
 import org.slf4j.LoggerFactory
 import org.subethamail.smtp.server.Session
 import java.io.*

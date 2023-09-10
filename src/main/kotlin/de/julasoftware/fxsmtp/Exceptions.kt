@@ -1,4 +1,4 @@
-package de.herrvoennchen.fxsmtp
+package de.julasoftware.fxsmtp
 
 import org.slf4j.LoggerFactory
 

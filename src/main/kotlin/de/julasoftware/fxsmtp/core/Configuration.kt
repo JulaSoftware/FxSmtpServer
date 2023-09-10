@@ -1,8 +1,8 @@
-package de.herrvoennchen.fxsmtp.core
+package de.julasoftware.fxsmtp.core
 
-import de.herrvoennchen.fxsmtp.model.ConfigModel
-import de.herrvoennchen.fxsmtp.model.EmailConfig
-import de.herrvoennchen.fxsmtp.model.SmtpConfig
+import de.julasoftware.fxsmtp.model.ConfigModel
+import de.julasoftware.fxsmtp.model.EmailConfig
+import de.julasoftware.fxsmtp.model.SmtpConfig
 import org.slf4j.LoggerFactory
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.LoaderOptions

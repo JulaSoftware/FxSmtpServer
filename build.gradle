@@ -9,7 +9,7 @@ plugins {
     id 'org.beryx.jlink' version '2.25.0'
 }
 
-group 'com.example'
+group 'de.julasoftware'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -26,8 +26,8 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 application {
-    mainModule = 'de.herrvoennchen.fxsmtp'
-    mainClass = 'de.herrvoennchen.fxsmtp.FxSmtpServerApplication'
+    mainModule = 'de.julasoftware.fxsmtp'
+    mainClass = 'de.julasoftware.fxsmtp.FxSmtpServerApplication'
 }
 kotlin {
     jvmToolchain(17)

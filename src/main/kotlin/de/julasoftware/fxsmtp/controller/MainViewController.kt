@@ -1,8 +1,8 @@
-package de.herrvoennchen.fxsmtp.controller
+package de.julasoftware.fxsmtp.controller
 
-import de.herrvoennchen.fxsmtp.FxSmtpServerApplication
-import de.herrvoennchen.fxsmtp.core.Configuration
-import de.herrvoennchen.fxsmtp.server.SmtpServer
+import de.julasoftware.fxsmtp.FxSmtpServerApplication
+import de.julasoftware.fxsmtp.core.Configuration
+import de.julasoftware.fxsmtp.server.SmtpServer
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader

@@ -1,6 +1,6 @@
-package de.herrvoennchen.fxsmtp
+package de.julasoftware.fxsmtp
 
-import de.herrvoennchen.fxsmtp.controller.MainViewController
+import de.julasoftware.fxsmtp.controller.MainViewController
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene

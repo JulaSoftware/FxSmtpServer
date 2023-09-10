@@ -1,4 +1,4 @@
-package de.herrvoennchen.fxsmtp.model
+package de.julasoftware.fxsmtp.model
 
 class ConfigModel {
     lateinit var email: EmailConfig

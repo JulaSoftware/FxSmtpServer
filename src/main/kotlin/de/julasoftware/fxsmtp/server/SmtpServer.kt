@@ -1,7 +1,7 @@
-package de.herrvoennchen.fxsmtp.server
+package de.julasoftware.fxsmtp.server
 
-import de.herrvoennchen.fxsmtp.BindPortException
-import de.herrvoennchen.fxsmtp.OutOfRangePortException
+import de.julasoftware.fxsmtp.BindPortException
+import de.julasoftware.fxsmtp.OutOfRangePortException
 import org.slf4j.LoggerFactory
 import org.subethamail.smtp.helper.SimpleMessageListenerAdapter
 import org.subethamail.smtp.server.SMTPServer

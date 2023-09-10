@@ -1,4 +1,4 @@
-package de.herrvoennchen.fxsmtp.model
+package de.julasoftware.fxsmtp.model
 
 import java.nio.file.Path
 import java.time.Instant

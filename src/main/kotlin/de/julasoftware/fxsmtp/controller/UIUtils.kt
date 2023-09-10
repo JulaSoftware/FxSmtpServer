@@ -1,4 +1,4 @@
-package de.herrvoennchen.fxsmtp.controller
+package de.julasoftware.fxsmtp.controller
 
 import javafx.scene.control.TextFormatter
 import javafx.util.StringConverter

@@ -1,6 +1,6 @@
-package de.herrvoennchen.fxsmtp.controller
+package de.julasoftware.fxsmtp.controller
 
-import de.herrvoennchen.fxsmtp.core.Configuration
+import de.julasoftware.fxsmtp.core.Configuration
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.event.ActionEvent

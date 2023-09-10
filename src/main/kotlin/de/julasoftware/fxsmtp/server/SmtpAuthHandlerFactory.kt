@@ -1,4 +1,4 @@
-package de.herrvoennchen.fxsmtp.server
+package de.julasoftware.fxsmtp.server
 
 import org.subethamail.smtp.AuthenticationHandler
 import org.subethamail.smtp.AuthenticationHandlerFactory
