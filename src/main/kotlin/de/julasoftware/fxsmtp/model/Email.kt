@@ -4,6 +4,7 @@ import java.nio.file.Path
 import java.util.*
 
 class Email(
+    val icon: String = "\uf0e0",
     var receivedDate: Date = Date(),
     var from: String? = null,
     var to: String? = null,
@@ -11,3 +12,5 @@ class Email(
     var emailString: String? = null,
     var filePath: Path? = null
 )
+
+fun emptyEmail(): Email = Email()

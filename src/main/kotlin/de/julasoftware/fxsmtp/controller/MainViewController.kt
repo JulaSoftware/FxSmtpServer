@@ -2,16 +2,14 @@ package de.julasoftware.fxsmtp.controller
 
 import de.julasoftware.fxsmtp.FxSmtpServerApplication
 import de.julasoftware.fxsmtp.core.Configuration
-import de.julasoftware.fxsmtp.core.ModelService
+import de.julasoftware.fxsmtp.core.ModelManager
+import de.julasoftware.fxsmtp.model.Email
 import de.julasoftware.fxsmtp.server.SmtpServer
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.TextField
-import javafx.scene.control.TextFormatter
+import javafx.scene.control.*
 import javafx.stage.Stage
 import javafx.util.converter.NumberStringConverter
 import org.slf4j.LoggerFactory
@@ -33,6 +31,9 @@ class MainViewController {
     @FXML
     private lateinit var statusLabel: Label
 
+    @FXML
+    private lateinit var emailTableView: TableView<Email>
+
     private val portProperty = SimpleIntegerProperty(Configuration.instance().loadedConfig.smtp.port)
 
     @FXML
@@ -45,7 +46,10 @@ class MainViewController {
 
         formatter.valueProperty().bindBidirectional(portProperty)
 
-        ModelService.instance().receivedEmailObservers.add { s -> logger.warn(s) }
+        ModelManager.instance().receivedEmailObservers.add { newMail ->
+            logger.warn("received email in Controller ${newMail.from}")
+            emailTableView.items.add(newMail)
+        }
     }
 
     @FXML

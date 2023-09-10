@@ -1,12 +1,9 @@
 package de.julasoftware.fxsmtp.core
 
 import de.julasoftware.fxsmtp.model.ConfigModel
-import de.julasoftware.fxsmtp.model.EmailConfig
-import de.julasoftware.fxsmtp.model.SmtpConfig
 import org.slf4j.LoggerFactory
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.LoaderOptions
-import org.yaml.snakeyaml.TypeDescription
 import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.constructor.Constructor
 import org.yaml.snakeyaml.nodes.Tag
@@ -14,6 +11,7 @@ import org.yaml.snakeyaml.representer.Representer
 import java.io.FileInputStream
 import java.io.FileWriter
 import java.io.InputStream
+import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.exists
 
@@ -38,6 +36,8 @@ class Configuration {
         yaml = Yaml(constructor, Representer(dumperOptions), dumperOptions)
 
         loadedConfig = yaml.load(configStream)
+
+        Files.createDirectories(Path.of(loadedConfig.email.folder))
     }
 
     private fun loadConfig(): InputStream {

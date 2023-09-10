@@ -1,23 +1,25 @@
 package de.julasoftware.fxsmtp.core
 
+import de.julasoftware.fxsmtp.model.Email
+import de.julasoftware.fxsmtp.model.emptyEmail
 import kotlin.properties.Delegates
 
-class ModelService {
-    val receivedEmailObservers = mutableListOf<(String) -> Unit>()
+class ModelManager {
+    val receivedEmailObservers = mutableListOf<(Email) -> Unit>()
 
-    var newEmail: String by Delegates.observable("") { _, _, newValue ->
+    var newEmail: Email by Delegates.observable(emptyEmail()) { _, _, newValue ->
         receivedEmailObservers.forEach { it(newValue) }
     }
 
     companion object {
         @Volatile
-        private var instance: ModelService? = null
+        private var instance: ModelManager? = null
 
-        fun instance(): ModelService {
+        fun instance(): ModelManager {
             if (instance == null) {
                 synchronized(this) {
                     if (instance == null) {
-                        instance = ModelService()
+                        instance = ModelManager()
                     }
                 }
             }

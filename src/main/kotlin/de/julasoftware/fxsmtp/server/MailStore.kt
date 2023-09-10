@@ -17,10 +17,10 @@ import java.util.regex.Pattern
 
 class MailStore {
     private val logger = LoggerFactory.getLogger(MailStore::class.java)
-    private val LineSeparator = System.getProperty("line.separator")
+    private val lineSeparator = System.getProperty("line.separator")
 
     // This can be a static variable since it is Thread Safe
-    private val SubjectPattern: Pattern = Pattern.compile("^Subject: (.*)$")
+    private val subjectPattern: Pattern = Pattern.compile("^Subject: (.*)$")
 
     private val dateFormat = SimpleDateFormat("ddMMyyhhmmssSSS")
 
@@ -34,10 +34,7 @@ class MailStore {
     }
 
     private fun saveEmailToFile(emailObj: String): Path {
-        val filePath = java.lang.String.format(
-            "%s%s%s", "./", File.separator, //UIModel.INSTANCE.getSavePath()
-            dateFormat.format(Date())
-        )
+        val filePath = "${Configuration.instance().loadedConfig.email.folder}${File.separator}${dateFormat.format(Date())}"
 
         var i = 0
         var file: File? = null
@@ -56,6 +53,7 @@ class MailStore {
             val smtpLogger = LoggerFactory.getLogger(Session::class.java)
             smtpLogger.error("Error: Can't save email: {}", e.message)
         }
+
         return file.toPath()
     }
 
@@ -71,7 +69,7 @@ class MailStore {
             try {
                 while (reader.readLine().also { line = it } != null) {
                     if (++lineNb > lineNbToStartCopy) {
-                        sb.append(line).append(LineSeparator)
+                        sb.append(line).append(lineSeparator)
                     }
                 }
             } catch (e: IOException) {
@@ -89,7 +87,7 @@ class MailStore {
                 val reader = BufferedReader(StringReader(data))
                 var line: String
                 while (reader.readLine().also { line = it } != null) {
-                    val matcher: Matcher = SubjectPattern.matcher(line)
+                    val matcher: Matcher = subjectPattern.matcher(line)
                     if (matcher.matches()) {
                         return matcher.group(1)
                     }

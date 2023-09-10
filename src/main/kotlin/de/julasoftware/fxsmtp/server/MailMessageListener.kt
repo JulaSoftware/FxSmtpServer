@@ -1,6 +1,6 @@
 package de.julasoftware.fxsmtp.server
 
-import de.julasoftware.fxsmtp.core.ModelService
+import de.julasoftware.fxsmtp.core.ModelManager
 import org.slf4j.LoggerFactory
 import org.subethamail.smtp.helper.SimpleMessageListener
 import java.io.InputStream
@@ -13,7 +13,8 @@ class MailMessageListener(private val mailStore: MailStore) : SimpleMessageListe
     }
 
     override fun deliver(from: String?, recipient: String?, data: InputStream?) {
-        ModelService.instance().newEmail = from!!
-        mailStore.save(from, recipient, data)
+        logger.debug("received email: $from, $recipient, ${data.toString()}")
+        val email = mailStore.save(from, recipient, data)
+        ModelManager.instance().newEmail = email
     }
 }
