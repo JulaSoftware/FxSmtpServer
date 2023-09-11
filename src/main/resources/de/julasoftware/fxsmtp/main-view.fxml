@@ -4,46 +4,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.julasoftware.fxsmtp.controller.MainViewController">
+<?import javafx.scene.text.Font?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.julasoftware.fxsmtp.controller.MainViewController">
     <top>
         <GridPane BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
                 <FlowPane hgap="10.0" vgap="10.0">
                     <children>
-                        <Label text="Port" />
-                        <TextField fx:id="portField" onKeyTyped="#updateSettings" prefWidth="74.0" promptText="Port" />
-                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#startServerClick" prefWidth="120.0" text="Start Server" />
-                        <Label fx:id="statusLabel" style="-fx-font-weight: bold;" text="Server stopped">
+                        <Label text="%mainView.port.label"/>
+                        <TextField fx:id="portField" onKeyTyped="#updateSettings" prefWidth="74.0" promptText="Port"/>
+                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#startServerClick" prefWidth="120.0" text="%mainView.startServer.label"/>
+                        <Label fx:id="statusLabel" style="-fx-font-weight: bold;" text="%mainView.stopServer.text">
                             <opaqueInsets>
-                                <Insets />
+                                <Insets/>
                             </opaqueInsets>
                             <FlowPane.margin>
-                                <Insets />
+                                <Insets/>
                             </FlowPane.margin>
                         </Label>
                     </children>
                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </padding>
                 </FlowPane>
                 <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
                     <children>
-                        <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettingsClick" prefWidth="120.0" text="Einstellungen" />
+                        <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettingsClick" prefWidth="120.0" text="%mainView.settings.label"/>
                     </children>
                     <opaqueInsets>
-                        <Insets />
+                        <Insets/>
                     </opaqueInsets>
                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </padding>
                 </HBox>
             </children>
@@ -51,50 +51,49 @@
     </top>
     <center>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-            <tabs>
-                <Tab text="Messages">
-                    <content>
-                        <TableView fx:id="emailTableView" onMouseClicked="#onMouseEvent">
-                            <columns>
-                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="150.0" text="Empfangen am">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="receivedDateFormatted" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="150.0" text="Empfänger">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="to" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="150.0" text="Absender">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="from" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="300.0" text="Betreff">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="subject" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" sortable="false" text="Lokale Datei" visible="false">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="filePath" />
-                                    </cellValueFactory>
-                                </TableColumn>
-                            </columns>
-                        </TableView>
-                    </content>
-                </Tab>
-                <Tab text="Log">
-                    <content>
-                        <TextArea fx:id="logTextArea" editable="false">
-                            <font>
-                                <Font name="Courier New" size="13.0" />
-                            </font>
-                        </TextArea>
-                    </content>
-                </Tab>
-            </tabs>
+            <Tab text="%mainView.emails.label">
+                <TableView fx:id="emailTableView" onMouseClicked="#onMouseEvent">
+                    <columns>
+                        <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="150.0"
+                                     text="%mainView.emails.recievedAt.label">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="receivedDateFormatted"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="150.0"
+                                     text="%mainView.emails.sender.label">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="from"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="150.0"
+                                     text="%mainView.emails.recipients.label">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="to"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="300.0"
+                                     text="%mainView.emails.subject.label">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="subject"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="-1.0" sortable="false"
+                                     visible="false">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="filePath"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </Tab>
+            <Tab text="%mainView.logs.label">
+                <TextArea fx:id="logTextArea" editable="false">
+                    <font>
+                        <Font name="Courier New" size="13.0"/>
+                    </font>
+                </TextArea>
+            </Tab>
         </TabPane>
     </center>
 </BorderPane>

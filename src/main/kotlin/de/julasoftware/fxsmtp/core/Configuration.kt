@@ -34,10 +34,10 @@ class Configuration {
         dumperOptions.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
 
         yaml = Yaml(constructor, Representer(dumperOptions), dumperOptions)
-
         loadedConfig = yaml.load(configStream)
 
         Files.createDirectories(Path.of(loadedConfig.email.folder))
+        ModelManager.instance().currentConfig = loadedConfig
     }
 
     private fun loadConfig(): InputStream {

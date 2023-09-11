@@ -1,19 +1,15 @@
 package de.julasoftware.fxsmtp
 
 import de.julasoftware.fxsmtp.controller.MainViewController
+import de.julasoftware.fxsmtp.controller.createWindowStage
 import javafx.application.Application
-import javafx.fxml.FXMLLoader
-import javafx.scene.Scene
 import javafx.stage.Stage
 
 class FxSmtpServerApplication : Application() {
 
     override fun start(stage: Stage) {
-        val fxmlLoader = FXMLLoader(FxSmtpServerApplication::class.java.getResource("main-view.fxml"))
-        val scene = Scene(fxmlLoader.load(), 800.0, 600.0)
-        stage.title = "FxSMTP Server"
-        stage.scene = scene
-        stage.setOnCloseRequest { fxmlLoader.getController<MainViewController>().shutdown() }
+        createWindowStage("main-view.fxml", width = 800.0, height = 600.0, preCreatedStage = stage)
+        stage.setOnCloseRequest { (stage.userData as MainViewController).shutdown() }
         stage.show()
     }
 }

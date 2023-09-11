@@ -1,46 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.web.WebView?>
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="de.julasoftware.fxsmtp.controller.DetailViewController">
+<?import javafx.scene.web.*?>
+
+<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.julasoftware.fxsmtp.controller.DetailViewController">
     <children>
-        <Label layoutX="12.0" layoutY="14.0" text="An" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="14.0"/>
-        <Label layoutX="25.0" layoutY="49.0" text="Von" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="49.0"/>
-        <Label layoutX="27.0" layoutY="84.0" text="Betreff" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="84.0"/>
-        <Label layoutX="17.0" layoutY="115.0" text="Nachricht" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="119.0"/>
-        <TextField fx:id="toTextField" editable="false" layoutX="135.0" layoutY="14.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0"
-                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0"/>
-        <TextField fx:id="fromTextField" editable="false" layoutX="252.0" layoutY="44.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0"
-                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="45.0"/>
-        <TextField fx:id="subjectTextField" editable="false" layoutX="205.0" layoutY="77.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0"
-                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0"/>
-        <TabPane layoutX="90.0" layoutY="119.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0"
-                 AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="115.0">
+        <Label layoutX="10.0" layoutY="15.0" text="%detailView.to.label" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
+        <Label layoutX="10.0" layoutY="50.0" text="%detailView.from.label" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
+        <Label layoutX="10.0" layoutY="85.0" text="%detailView.subject.label" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="155.0" />
+        <Label layoutX="10.0" layoutY="190.0" text="%detailView.message.label" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="190.0" />
+        <Label layoutX="10.0" layoutY="120.0" text="%detailView.cc.label" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="85.0" />
+        <Label layoutX="10.0" layoutY="155.0" text="%detailView.bcc.label" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="120.0" />
+        <TextField fx:id="toTextField" editable="false" layoutX="135.0" layoutY="14.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+        <TextField fx:id="fromTextField" editable="false" layoutX="252.0" layoutY="44.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="45.0" />
+        <TextField fx:id="subjectTextField" editable="false" layoutX="205.0" layoutY="77.0" prefHeight="25.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="150.0" />
+        <TextField fx:id="ccTextField" editable="false" layoutX="254.0" layoutY="118.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
+        <TextField fx:id="bccTextField" editable="false" layoutX="320.0" layoutY="158.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="115.0" />
+        <TabPane layoutX="90.0" layoutY="184.0" prefHeight="306.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="185.0">
             <tabs>
-                <Tab text="Nachricht">
+                <Tab text="%detailView.message.label">
                     <content>
-                        <WebView fx:id="messageWebView" prefHeight="110.0" prefWidth="54.0"/>
+                        <WebView fx:id="messageWebView" prefHeight="110.0" prefWidth="54.0" />
                     </content>
                 </Tab>
-                <Tab fx:id="attachmentsTab" text="Anhänge">
+                <Tab fx:id="attachmentsTab" text="%detailView.attachments.label">
                     <content>
                         <TableView fx:id="attachmentsTableView" layoutX="50.0" layoutY="27.0">
                             <columns>
-                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="200.0" text="Dateiname">
+                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="200.0" text="%detailView.attachments.fileName.label">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="fileName"/>
+                                        <PropertyValueFactory property="fileName" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="150.0" text="Größe">
+                                <TableColumn editable="false" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="150.0" text="%detailView.attachments.fileSize.label">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="attachmentSize"/>
+                                        <PropertyValueFactory property="attachmentSize" />
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>
                         </TableView>
+                    </content>
+                </Tab>
+                <Tab text="%detailView.rawEmail.label">
+                    <content>
+                        <TextArea fx:id="rawMailTextArea" editable="false" />
                     </content>
                 </Tab>
             </tabs>

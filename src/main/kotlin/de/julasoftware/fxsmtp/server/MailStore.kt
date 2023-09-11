@@ -1,37 +1,30 @@
 package de.julasoftware.fxsmtp.server
 
 import de.julasoftware.fxsmtp.core.Configuration
-import de.julasoftware.fxsmtp.core.I18n
 import de.julasoftware.fxsmtp.model.Email
 import org.slf4j.LoggerFactory
 import org.subethamail.smtp.server.Session
 import java.io.*
-import java.nio.charset.Charset
 import java.nio.file.Path
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 import javax.mail.internet.MimeMessage
 
 
 class MailStore {
     private val logger = LoggerFactory.getLogger(MailStore::class.java)
-    private val lineSeparator = System.getProperty("line.separator")
-
-    // This can be a static variable since it is Thread Safe
-    private val subjectPattern: Pattern = Pattern.compile("^Subject: (.*)$")
 
     private val dateFormat = SimpleDateFormat("ddMMyyhhmmssSSS")
 
-
     fun save(from: String?, to: String?, data: InputStream?): Email {
         val mimeMessage = MimeMessage(javax.mail.Session.getDefaultInstance(System.getProperties()), data)
+        val baos = ByteArrayOutputStream()
+        mimeMessage.writeTo(baos)
+        val rawString = baos.toString()
+        baos.close()
+
         return Email(
-            from = from,
-            to = to,
-            mimeMessage = mimeMessage,
-            filePath = saveEmailToFile(mimeMessage)
+            from = from, to = to, mimeMessage = mimeMessage, filePath = saveEmailToFile(mimeMessage), rawString = rawString
         )
     }
 
@@ -50,7 +43,6 @@ class MailStore {
 
         try {
             emailMessage.writeTo(FileOutputStream(file))
-            //Files.writeString(file.toPath(), emailObj)
         } catch (e: IOException) {
             // If we can't save file, we display the error in the SMTP logs
             val smtpLogger = LoggerFactory.getLogger(Session::class.java)

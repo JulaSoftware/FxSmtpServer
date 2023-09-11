@@ -6,17 +6,25 @@ import java.nio.file.Path
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.mail.BodyPart
-import javax.mail.internet.MimeBodyPart
+import javax.mail.Message
 import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
 
 class Email(
-    var receivedDate: Date = Date(), var from: String? = null, var to: String? = null, var filePath: Path? = null, var mimeMessage: MimeMessage? = null
+    var receivedDate: Date = Date(),
+    var from: String? = null,
+    var to: String? = null,
+    var filePath: Path? = null,
+    var mimeMessage: MimeMessage? = null,
+    var rawString: String = ""
 ) {
     private val logger = LoggerFactory.getLogger(Email::class.java)
     private val dateFormatter = SimpleDateFormat("dd.MM.yyyy HH:mm:ss")
 
     val subject: String? = mimeMessage?.subject
+
+    val cc: String? = mimeMessage?.allRecipients?.filter { it.type == Message.RecipientType.CC.toString() }?.joinToString()
+    val bcc: String? = mimeMessage?.allRecipients?.filter { it.type == Message.RecipientType.BCC.toString() }?.joinToString()
 
     val receivedDateFormatted: String = dateFormatter.format(receivedDate)
 
