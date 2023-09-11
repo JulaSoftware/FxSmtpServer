@@ -1,6 +1,7 @@
 email:
   suffix: '.eml'
   folder: 'received-emails'
+  autoCleanUp: true
 
 smtp:
   port: 25

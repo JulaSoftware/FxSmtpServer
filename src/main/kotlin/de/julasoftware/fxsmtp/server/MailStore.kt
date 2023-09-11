@@ -9,6 +9,8 @@ import java.nio.file.Path
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.mail.internet.MimeMessage
+import kotlin.io.path.deleteIfExists
+import kotlin.io.path.listDirectoryEntries
 
 
 class MailStore {
@@ -54,5 +56,9 @@ class MailStore {
 
     fun delete() {
 
+    }
+
+    fun deleteAll() {
+        Path.of(Configuration.instance().loadedConfig.email.folder).listDirectoryEntries().forEach { it.deleteIfExists() }
     }
 }

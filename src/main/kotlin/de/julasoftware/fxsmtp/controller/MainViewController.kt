@@ -108,11 +108,12 @@ class MainViewController {
 
     fun shutdown() {
         SmtpServer.instance().stopServer()
+        SmtpServer.instance().cleanUp()
     }
 
     @FXML
     fun openSettingsClick() {
-        val stage = createWindowStage("config-view.fxml", height = 200.0, title = bundle.getString("mainView.settings.label"), alwaysOnTop = true)
+        val stage = createWindowStage("config-view.fxml", width = 500.0, height = 250.0, title = bundle.getString("mainView.settings.label"), alwaysOnTop = true)
         stage.setOnHidden {
             portProperty.value = Configuration.instance().loadedConfig.smtp.port
         }

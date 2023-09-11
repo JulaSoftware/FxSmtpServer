@@ -2,6 +2,7 @@ package de.julasoftware.fxsmtp.server
 
 import de.julasoftware.fxsmtp.BindPortException
 import de.julasoftware.fxsmtp.OutOfRangePortException
+import de.julasoftware.fxsmtp.core.Configuration
 import org.slf4j.LoggerFactory
 import org.subethamail.smtp.helper.SimpleMessageListenerAdapter
 import org.subethamail.smtp.server.SMTPServer
@@ -10,11 +11,11 @@ import java.net.InetAddress
 class SmtpServer {
     private val logger = LoggerFactory.getLogger(SmtpServer::class.java)
     private var smtpServer: SMTPServer? = null
+    private val mailStore = MailStore()
 
     fun startServer(port: Int, bindAddress: InetAddress? = null) {
         try {
-            smtpServer =
-                SMTPServer(SimpleMessageListenerAdapter(MailMessageListener(MailStore())), SmtpAuthHandlerFactory())
+            smtpServer = SMTPServer(SimpleMessageListenerAdapter(MailMessageListener(mailStore)), SmtpAuthHandlerFactory())
             smtpServer!!.bindAddress = bindAddress
             smtpServer!!.port = port
             smtpServer!!.start()
@@ -39,6 +40,12 @@ class SmtpServer {
             logger.debug("stopping server")
             smtpServer!!.stop()
             smtpServer = null
+        }
+    }
+
+    fun cleanUp() {
+        if (Configuration.instance().loadedConfig.email.autoCleanUp) {
+            mailStore.deleteAll()
         }
     }
 

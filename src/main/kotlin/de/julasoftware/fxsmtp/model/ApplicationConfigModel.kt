@@ -8,6 +8,7 @@ class ConfigModel {
 class EmailConfig {
     var suffix: String = ".msg"
     var folder: String = "received-emails"
+    var autoCleanUp: Boolean = true
 }
 
 class SmtpConfig {
