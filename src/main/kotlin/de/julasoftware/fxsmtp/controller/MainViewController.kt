@@ -6,6 +6,7 @@ import de.julasoftware.fxsmtp.core.ModelManager
 import de.julasoftware.fxsmtp.model.Email
 import de.julasoftware.fxsmtp.server.SmtpServer
 import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleStringProperty
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
@@ -36,7 +37,11 @@ class MainViewController {
     @FXML
     private lateinit var emailTableView: TableView<Email>
 
+    @FXML
+    private lateinit var logTextArea: TextArea
+
     private val portProperty = SimpleIntegerProperty(Configuration.instance().loadedConfig.smtp.port)
+    private val logProperty = SimpleStringProperty("")
 
     @FXML
     fun initialize() {
@@ -48,9 +53,15 @@ class MainViewController {
 
         formatter.valueProperty().bindBidirectional(portProperty)
 
+        logTextArea.textProperty().bindBidirectional(logProperty)
+
         ModelManager.instance().receivedEmailObservers.add { newMail ->
             logger.warn("received email in Controller ${newMail.from}")
             emailTableView.items.add(newMail)
+        }
+
+        ModelManager.instance().smtpLogObservers.add { log ->
+            logProperty.value += log + System.getProperty("line.separator")
         }
     }
 
@@ -94,6 +105,7 @@ class MainViewController {
         }
 
         portField.isEditable = !SmtpServer.instance().isRunning()
+        settingsButton.isDisable = SmtpServer.instance().isRunning()
     }
 
     fun shutdown() {

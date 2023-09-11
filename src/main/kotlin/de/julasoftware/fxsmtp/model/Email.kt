@@ -1,10 +1,12 @@
 package de.julasoftware.fxsmtp.model
 
+import org.apache.commons.mail.EmailAttachment
 import org.slf4j.LoggerFactory
 import java.nio.file.Path
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.mail.BodyPart
+import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
 
@@ -36,6 +38,21 @@ class Email(
                 return contentPart?.content?.toString()
             }
             return mimeMessage?.content?.toString()
+        }
+
+    val attachments: List<BodyPart>
+        get() {
+            val attachmentList = mutableListOf<BodyPart>()
+            if (mimeMessage?.content is MimeMultipart) {
+                for (i in 0 until (mimeMessage!!.content as MimeMultipart).count) {
+                    val part = (mimeMessage!!.content as MimeMultipart).getBodyPart(i)
+                    if (part.disposition == EmailAttachment.ATTACHMENT) {
+                        attachmentList.add(part)
+                    }
+                }
+            }
+
+            return attachmentList
         }
 }
 

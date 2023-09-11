@@ -60,49 +60,6 @@ class MailStore {
         return file.toPath()
     }
 
-    private fun convertToString(data: InputStream?): String {
-        if (data != null) {
-            val lineNbToStartCopy: Long = 4 // Do not copy the first 4 lines (received part)
-
-            val reader = BufferedReader(InputStreamReader(data, Charset.forName(I18n.UTF8)))
-            val sb = StringBuilder()
-
-            var line: String?
-            var lineNb: Long = 0
-            try {
-                while (reader.readLine().also { line = it } != null) {
-                    if (++lineNb > lineNbToStartCopy) {
-                        sb.append(line).append(lineSeparator)
-                    }
-                }
-            } catch (e: IOException) {
-                logger.error("", e)
-            }
-            return sb.toString()
-        }
-
-        return ""
-    }
-
-    private fun getSubjectFromEmail(data: String?): String {
-        if (data != null) {
-            try {
-                val reader = BufferedReader(StringReader(data))
-                var line: String
-                while (reader.readLine().also { line = it } != null) {
-                    val matcher: Matcher = subjectPattern.matcher(line)
-                    if (matcher.matches()) {
-                        return matcher.group(1)
-                    }
-                }
-            } catch (e: IOException) {
-                logger.error("error reading subject from Mail", e)
-            }
-        }
-
-        return ""
-    }
-
     fun delete() {
 
     }

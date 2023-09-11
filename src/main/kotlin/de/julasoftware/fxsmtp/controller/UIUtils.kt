@@ -24,9 +24,3 @@ val integerFilter: UnaryOperator<TextFormatter.Change> = UnaryOperator<TextForma
     }
     null
 }
-
-val stringConverter: StringConverter<Int> = object : IntegerStringConverter() {
-    override fun fromString(s: String): Int {
-        return if (s.isEmpty()) 0 else super.fromString(s)
-    }
-}

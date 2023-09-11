@@ -59,8 +59,8 @@ class SendMailTests {
         email.setSmtpPort(TEST_INTEGRATION_PORT)
         email.setStartTLSEnabled(true)
         email.setFrom("test-sender@gmail.com")
-        email.subject = "Simple Email Integration Test #1"
-        email.setMsg("This is a simple email integration test. Test #1")
+        email.subject = "Email with Attachments Integration Test #3"
+        email.setMsg("<html><body>This is a email with attachments integration test.<br /><br /><b>Test #3</b></body></html>")
         email.setTo(listOf(InternetAddress("test-receiver@gmail.com")))
 
         val attachment = EmailAttachment()
@@ -68,7 +68,6 @@ class SendMailTests {
         attachment.disposition = EmailAttachment.ATTACHMENT
         attachment.description = "Test attachment file"
         attachment.name = "envelope-circle-check.svg"
-
         email.attach(attachment)
 
         email.send()

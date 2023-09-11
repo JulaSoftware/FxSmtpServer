@@ -3,10 +3,12 @@ package de.julasoftware.fxsmtp.server
 import de.julasoftware.fxsmtp.core.ModelManager
 import org.slf4j.LoggerFactory
 import org.subethamail.smtp.helper.SimpleMessageListener
+import org.subethamail.smtp.server.Session
 import java.io.InputStream
 
 class MailMessageListener(private val mailStore: MailStore) : SimpleMessageListener {
-    private val logger = LoggerFactory.getLogger(MailMessageListener::class.java)
+    private val logger = LoggerFactory.getLogger(Session::class.java)
+
 
     override fun accept(from: String?, recipient: String?): Boolean {
         return true
