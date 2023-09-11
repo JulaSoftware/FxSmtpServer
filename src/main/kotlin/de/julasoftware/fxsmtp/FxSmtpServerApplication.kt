@@ -14,6 +14,7 @@ class FxSmtpServerApplication : Application() {
     }
 }
 
-fun main() {
+fun main(args: Array<String>) {
+    System.setProperty("mail.mime.decodetext.strict", "false");
     Application.launch(FxSmtpServerApplication::class.java)
 }
