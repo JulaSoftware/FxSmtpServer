@@ -54,8 +54,8 @@ class MailStore {
         return file.toPath()
     }
 
-    fun delete() {
-
+    fun delete(email: Email) {
+        email.filePath?.deleteIfExists()
     }
 
     fun deleteAll() {

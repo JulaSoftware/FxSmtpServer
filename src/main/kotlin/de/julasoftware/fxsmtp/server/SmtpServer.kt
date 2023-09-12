@@ -3,6 +3,8 @@ package de.julasoftware.fxsmtp.server
 import de.julasoftware.fxsmtp.BindPortException
 import de.julasoftware.fxsmtp.OutOfRangePortException
 import de.julasoftware.fxsmtp.core.Configuration
+import de.julasoftware.fxsmtp.core.ModelManager
+import de.julasoftware.fxsmtp.model.Email
 import org.slf4j.LoggerFactory
 import org.subethamail.smtp.helper.SimpleMessageListenerAdapter
 import org.subethamail.smtp.server.SMTPServer
@@ -47,6 +49,11 @@ class SmtpServer {
         if (Configuration.instance().loadedConfig.email.autoCleanUp) {
             mailStore.deleteAll()
         }
+    }
+
+    fun deleteMail(email: Email?) {
+        mailStore.delete(email!!)
+        ModelManager.instance().mailHasBeenDeleted = email
     }
 
     companion object {

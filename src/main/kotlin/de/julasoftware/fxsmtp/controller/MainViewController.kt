@@ -38,6 +38,12 @@ class MainViewController {
     @FXML
     private lateinit var logTextArea: TextArea
 
+    @FXML
+    private lateinit var detailsMenuItem: MenuItem
+
+    @FXML
+    private lateinit var deleteMenuItem: MenuItem
+
     private val portProperty = SimpleIntegerProperty(Configuration.instance().loadedConfig.smtp.port)
     private val logProperty = SimpleStringProperty("")
     private val bundle = ResourceBundle.getBundle("bundles/Messages", Locale.getDefault())
@@ -66,6 +72,13 @@ class MainViewController {
         ModelManager.instance().configChangedObservers.add { configModel ->
             portProperty.value = configModel.smtp.port
         }
+
+        ModelManager.instance().emailDeleteObservers.add { email ->
+            emailTableView.items.removeAll(email)
+        }
+
+        detailsMenuItem.disableProperty().bind(emailTableView.selectionModel.selectedIndexProperty().lessThanOrEqualTo(0))
+        deleteMenuItem.disableProperty().bind(emailTableView.selectionModel.selectedIndexProperty().lessThanOrEqualTo(0))
     }
 
     @FXML
@@ -73,6 +86,16 @@ class MainViewController {
         if (event.button == MouseButton.PRIMARY && event.clickCount == 2) {
             openEmailDetails((event.source as TableView<Email>).selectionModel.selectedItem)
         }
+    }
+
+    @FXML
+    private fun openDetailsContextMenuClick() {
+        openEmailDetails(emailTableView.selectionModel.selectedItem)
+    }
+
+    @FXML
+    private fun deleteEmailContextMenuClick() {
+        SmtpServer.instance().deleteMail(emailTableView.selectionModel.selectedItem)
     }
 
     private fun openEmailDetails(email: Email) {
@@ -113,7 +136,8 @@ class MainViewController {
 
     @FXML
     fun openSettingsClick() {
-        val stage = createWindowStage("config-view.fxml", width = 500.0, height = 250.0, title = bundle.getString("mainView.settings.label"), alwaysOnTop = true)
+        val stage =
+            createWindowStage("config-view.fxml", width = 500.0, height = 250.0, title = bundle.getString("mainView.settings.label"), alwaysOnTop = true)
         stage.setOnHidden {
             portProperty.value = Configuration.instance().loadedConfig.smtp.port
         }

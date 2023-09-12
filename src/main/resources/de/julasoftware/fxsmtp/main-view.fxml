@@ -85,6 +85,15 @@
                             </cellValueFactory>
                         </TableColumn>
                     </columns>
+                    <contextMenu>
+                        <ContextMenu>
+                            <items>
+                                <MenuItem text="%mainView.contextMenu.items.details" fx:id="detailsMenuItem" onAction="#openDetailsContextMenuClick"/>
+                                <SeparatorMenuItem/>
+                                <MenuItem text="%mainView.contextMenu.items.delete" fx:id="deleteMenuItem" onAction="#deleteEmailContextMenuClick"/>
+                            </items>
+                        </ContextMenu>
+                    </contextMenu>
                 </TableView>
             </Tab>
             <Tab text="%mainView.logs.label">
@@ -95,5 +104,6 @@
                 </TextArea>
             </Tab>
         </TabPane>
+
     </center>
 </BorderPane>
